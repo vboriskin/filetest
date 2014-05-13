@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: \out\production\vboriskin;\lib\mysql-connector-java-5.1.30
+ -bin.jar;
+Main-Class: filetest.Main
+
