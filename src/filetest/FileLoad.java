@@ -27,7 +27,8 @@ public class FileLoad {
         try {
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(sourceFileName),"UTF-8"));
+                            new FileInputStream(sourceFileName), "UTF-8")
+            );
             String line;
             while ((line = reader.readLine()) != null) {
                 addNewPair(line);
@@ -298,41 +299,33 @@ public class FileLoad {
 
     static class ComparatorNameAscending implements Comparator<Pair> {
         @Override
-        public int compare(Pair o1, Pair o2) {
-            String str1 = o1.getName();
-            String str2 = o2.getName();
+        public int compare(Pair str1, Pair str2) {
 
-            return str1.compareToIgnoreCase(str2);
+            return str1.getName().compareToIgnoreCase(str2.getName());
         }
     }
 
     static class ComparatorNameDescending implements Comparator<Pair> {
         @Override
-        public int compare(Pair o1, Pair o2) {
-            String str1 = o1.getName();
-            String str2 = o2.getName();
+        public int compare(Pair str1, Pair str2) {
 
-            return o2.getName().compareToIgnoreCase(o1.getName());
+            return str2.getName().compareToIgnoreCase(str1.getName());
         }
     }
 
     static class ComparatorValueAscending implements Comparator<Pair> {
         @Override
-        public int compare(Pair o1, Pair o2) {
-            String str1 = o1.getValue();
-            String str2 = o2.getValue();
+        public int compare(Pair str1, Pair str2) {
 
-            return str1.compareToIgnoreCase(str2);
+            return str1.getValue().compareToIgnoreCase(str2.getValue());
         }
     }
 
     static class ComparatorValueDescending implements Comparator<Pair> {
         @Override
-        public int compare(Pair o1, Pair o2) {
-            String str1 = o1.getValue();
-            String str2 = o2.getValue();
+        public int compare(Pair str1, Pair str2) {
 
-            return str2.compareToIgnoreCase(str1);
+            return str2.getValue().compareToIgnoreCase(str1.getValue());
         }
     }
 }
