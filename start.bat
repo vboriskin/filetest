@@ -1,0 +1,1 @@
+java -classpath ".\out\production\vboriskin;.\lib\mysql-connector-java-5.1.30-bin.jar;" filetest.Main
