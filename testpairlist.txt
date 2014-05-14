@@ -1,0 +1,37 @@
+﻿
+count = 100
+Property1 = 10
+property1 = 1,5
+Path = C:\Windows
+cpu=Intel Core2 Duo
+
+ip_address = 127.0.0.1
+Comment = Файл с исходными данными
+CAPS = CAPS
+
+one two = three
+
+qwer = t y 
+
+t == test
+
+t = test===
+_t = test
+t_t = test
+_tt_ = test 
+t = t_e_s_t
+T = TEST
+t = TEST
+
+_T = TesT
+T_t = test
+1t = t1t1 t1
+NAME + VALUE
+NAME - VALUE
+NAME = VALUE
+N_A_M_E = value
+N+A+M+E = VaLUE
+_NAME-=V-ALUE
+
+_1NAME=_2VALUE
+
