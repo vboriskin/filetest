@@ -83,15 +83,12 @@ public class Menu {
         }
     }
 
-    /*
-    В классе checkConsoleMessage(String consoleMessage) проверяем то, что ввел пользователь.
-            */
     public void checkConsoleMessage(String consoleMessage) throws IOException {
 
         try {
             boolean notExit = true;
             while (notExit) {
-                switch (consoleMessage.toUpperCase()) {
+                switch (consoleMessage.toUpperCase().trim()) {
 
                     case HELP:
                         commandList();
@@ -149,6 +146,7 @@ public class Menu {
                     case SAVE_LIST:
                         System.out.println("Введите путь к файлу.");
                         file.saveList(consoleInput());
+                        System.out.println("Список сохранен.");
                         break;
 
                     case ADD_LIST_TO_DATABASE:
@@ -165,6 +163,7 @@ public class Menu {
 
                     case CLEAR_LIST:
                         file.clearList();
+                        System.out.println("Список очищен.");
                         break;
 
                     case QUIT:
@@ -187,7 +186,7 @@ public class Menu {
     public void getUserInput() throws IOException {
         try {
             BufferedReader in
-                    = new BufferedReader(new InputStreamReader(System.in));                 //??? NULL
+                    = new BufferedReader(new InputStreamReader(System.in,"Cp866"));                 //??? NULL
 
             checkConsoleMessage(in.readLine());
         } catch (NullPointerException e) {
@@ -197,7 +196,7 @@ public class Menu {
 
     public String consoleInput() throws IOException {
         BufferedReader in
-                = new BufferedReader(new InputStreamReader(System.in));
+                = new BufferedReader(new InputStreamReader(System.in,"Cp866"));
         return in.readLine();
     }
 }

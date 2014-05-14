@@ -47,8 +47,12 @@ public class Pair {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) return false;
-        if (!(o instanceof Pair)) return false;
+        if (o == null) {
+            return false;
+        }
+        if (!(o instanceof Pair)) {
+            return false;
+        }
         Pair pair = (Pair) o;
         return this.name.equals(pair.getName()) &&
                 this.value.equals(pair.getValue());

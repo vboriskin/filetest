@@ -58,22 +58,24 @@ public class FileLoad {
             int keyValueCount = 0;
 
             if (checkWithRegExp(s)) {
-                box = s.trim().split("=");
+                box = s.trim().split("=", 2);
 
                 for (String b : box) {
+
                     if (keyValueCount % 2 == 0) {
                         name = b.trim();
                     } else {
                         value = b.trim();
                     }
                     keyValueCount++;
+
                 }
                 Pair pair = new Pair(name, value);
                 pairList.add(pair);
             } else if (s.matches("\\s+") || s.isEmpty()) {
-                System.out.println("Line does not match: " + "null");
+                System.out.println("Пара не соответствует: строка пуста");
             } else {
-                System.out.println("Line does not match: " + s);
+                System.out.println("Пара не соответствует: " + s);
             }
         } catch (NullPointerException e) {
             System.out.print("Inside addNewPair():");
@@ -90,7 +92,7 @@ public class FileLoad {
      * @return true if userNameString matches regex, false if not
      */
     public boolean checkWithRegExp(String s) {
-        Pattern p = Pattern.compile("^_?[a-z|A-Z]\\w+\\s?\\=.+$");
+        Pattern p = Pattern.compile("^_?[a-z|A-Z]\\w*\\s*\\=\\s*[^=]*$");
         Matcher m = p.matcher(s);
         return m.matches();
     }
@@ -135,8 +137,8 @@ public class FileLoad {
             for (Pair e : pairList) {
                 Database.databaseQuery("INSERT INTO " + databaseName + "(" + columns + ") " +
                         "VALUES ('" + e.getName() + "','" + e.getValue() + "');");
-                System.out.println("DATABASE SUCCESS");
             }
+            System.out.println("DATABASE SUCCESS");
         } catch (Exception e) {
             System.out.print("Inside showList():");
             e.printStackTrace();
@@ -151,19 +153,23 @@ public class FileLoad {
      *                             exception occurred
      */
     public void saveList(String destFileName) throws IOException {
+        BufferedWriter bufferedWriter = null;
         try (FileOutputStream fileOutputStream = new FileOutputStream(destFileName);) {
 
-            BufferedWriter bufferedWriter = new BufferedWriter(
+            bufferedWriter = new BufferedWriter(
                     new OutputStreamWriter(fileOutputStream, "UTF-8"));
             for (Pair p : pairList) {
-                bufferedWriter.write(p.getName() + "=" + p.getValue() + "\n");
+
+                bufferedWriter.write(p.getName() + "=" + p.getValue());
+                bufferedWriter.newLine();
             }
             bufferedWriter.flush();
-            bufferedWriter.close();
 
         } catch (Exception e) {
             System.out.print("Inside saveList():");
             e.printStackTrace();
+        } finally {
+            bufferedWriter.close();
         }
     }
 
@@ -222,7 +228,7 @@ public class FileLoad {
                 pair = it.next();
 
                 if (pair.getName().equalsIgnoreCase(s)) {
-                    System.out.println(pair.getName() + " " + pair.getValue());
+                    System.out.println(pair.getName() + "=" + pair.getValue());
                 }
             }
         }
@@ -246,7 +252,7 @@ public class FileLoad {
                 pair = it.next();
 
                 if (pair.getValue().equalsIgnoreCase(s)) {
-                    System.out.println(pair.getName() + " " + pair.getValue());
+                    System.out.println(pair.getName() + "=" + pair.getValue());
                 }
             }
         }
